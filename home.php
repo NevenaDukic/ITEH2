@@ -16,11 +16,8 @@ if(!$rezultat){
     die();
 }
 
-if($rezultat->num_rows==0){
-    echo "Nema prijava na kolokvijume";
-    die();
-}
-else{
+
+
 
 ?>
 <!DOCTYPE html>
@@ -58,7 +55,14 @@ else{
 </div>
 
 <div id="pregled" class="panel panel-success" style="margin-top: 1%;">
-    
+    <?php
+    if($rezultat->num_rows==0){
+        echo "Nema prijava na kolokvijume";
+       // die();
+    }
+    else{
+        //ovo se prikayuje ako imamo u tabeli
+    ?>
     <div class="panel-body">
         <table id="myTable" class="table table-hover table-striped" style="color: black; background-color: grey;" >
             <thead class ="thead">
@@ -72,6 +76,8 @@ else{
             <tbody>
             <?php 
                 while($red=$rezultat->fetch_array()):
+                    //moze i fetch_object()
+                    //dole moye red->predmet
             ?>
                 <tr>
                     <td><?php echo $red["predmet"] ?></td>
@@ -89,7 +95,7 @@ else{
                 <?php
                 endwhile;
 
-            } //zatvaranje else-a
+            
                 ?>
 
             </tbody>
@@ -109,6 +115,9 @@ else{
                 </div>
 
         </div>
+        <?php
+            } //zatvaranje else-a
+        ?>
     </div>
 </div>
 
